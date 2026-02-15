@@ -1,0 +1,133 @@
+Router2#show running-config
+Building configuration...
+
+Current configuration : 2041 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router2
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FTX15245PE0-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ description R2<->R3 ring
+ ip address 192.168.5.1 255.255.255.252
+ ip ospf 1 area 0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ description R2<->R0 ring
+ ip address 192.168.2.2 255.255.255.252
+ ip ospf 1 area 0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ description R2<->MLS5 Gi0/1 (YZGT uplink)
+ no ip address
+ ip ospf 1 area 0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2.10
+ description YZGT VLAN10
+ encapsulation dot1Q 10
+ ip address 10.66.10.1 255.255.255.0
+ ip ospf 1 area 0
+ ip access-group ACL-V10-SEG in
+!
+interface GigabitEthernet0/2.20
+ description YZGT VLAN20
+ encapsulation dot1Q 20
+ ip address 10.66.20.1 255.255.255.0
+ ip ospf 1 area 0
+ ip access-group ACL-V20-SEG in
+!
+interface GigabitEthernet0/2.99
+ description YZGT VLAN99 (Servers)
+ encapsulation dot1Q 99
+ ip address 10.66.99.1 255.255.255.0
+ ip ospf 1 area 0
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+ip access-list extended ACL-V10-SEG
+ deny ip any 10.6.20.0 0.0.0.255
+ deny ip any 10.38.20.0 0.0.0.255
+ deny ip any 10.66.20.0 0.0.0.255
+ deny ip any 10.7.20.0 0.0.0.255
+ deny ip any 10.6.99.0 0.0.0.255
+ deny ip any 10.38.99.0 0.0.0.255
+ permit ip any any
+ip access-list extended ACL-V20-SEG
+ deny ip any 10.6.10.0 0.0.0.255
+ deny ip any 10.38.10.0 0.0.0.255
+ deny ip any 10.66.10.0 0.0.0.255
+ deny ip any 10.7.10.0 0.0.0.255
+ deny ip any 10.6.99.0 0.0.0.255
+ deny ip any 10.38.99.0 0.0.0.255
+ permit ip any any
+ip access-list extended ACL-V99-TIER
+ deny ip any 10.6.99.0 0.0.0.255
+ deny ip any 10.38.99.0 0.0.0.255
+ permit ip any any
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
