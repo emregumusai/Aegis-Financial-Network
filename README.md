@@ -44,10 +44,16 @@ Bu proje, **802.1Q kapsülleme**, **OSPF Area 0 omurga yönlendirmesi**, **LACP 
 
 ## ❌ The Problem: Legacy Architecture Failures / Sorun: Eski Mimari Hataları
 
-### Legacy Architecture (v1): Layer 3 Switching Model
+### Legacy vs Modern Topology Comparison / Topoloji Karşılaştırması
 
-![Legacy Topology](docs/images/01_Legacy_Topology_v1.png)
-*Figure 2: Legacy Architecture with Distributed L3 Switching*
+| **Legacy Architecture (v1) — FAILED ❌** | **Modern Architecture (v2) — SOLVED ✅** |
+|:---:|:---:|
+| ![Legacy Topology](docs/images/01_Legacy_Topology_v1.png) | ![Modern Topology](docs/images/04_Modern_Topology_v2.png) |
+| *Layer 3 Switching with Distributed SVIs* <br> *(Dağıtık SVI'ler ile Layer 3 Switching)* | *Router-on-a-Stick with Centralized Routing* <br> *(Merkezi Yönlendirme ile ROAS)* |
+
+---
+
+### Legacy Architecture (v1): Layer 3 Switching Model
 
 **[EN]** The original network design utilized **Layer 3 Switching** with inter-VLAN routing performed on Multilayer Switches (MLS) using Switch Virtual Interfaces (SVIs). While this approach can work in smaller networks, it created critical problems in this multi-site financial environment:
 
@@ -68,15 +74,19 @@ Bu proje, **802.1Q kapsülleme**, **OSPF Area 0 omurga yönlendirmesi**, **LACP 
    - ACL match counters scattered across 8 switches
    - No centralized policy enforcement
 
-![Legacy Server Ping Fail](docs/images/03_Legacy_Server_Ping_Fail.png)
-*Figure 3: **Critical Failure** — Server-to-Server Ping Blocked in Legacy Architecture*
-
 **[TR]** Orijinal ağ tasarımı, Çok Katmanlı Anahtarlar (MLS) üzerinde Switch Virtual Interface'ler (SVI'ler) kullanarak VLAN'lar arası yönlendirme gerçekleştiren **Layer 3 Switching** kullandı. Bu yaklaşım küçük ağlarda işe yarayabilse de, bu çok siteli finans ortamında kritik sorunlar yarattı:
 
 **Kritik Sorunlar:**
 - ACL çakışmaları ve yönlendirme tutarsızlıkları
 - **VLAN 99** sunucu replikasyonu hatası (Ölümcül sorun)
 - Karmaşık sorun giderme
+
+### Critical Failure Evidence / Kritik Hata Kanıtı
+
+| **Legacy (v1) — Server Replication BLOCKED ❌** | **Modern (v2) — Server Connectivity RESTORED ✅** |
+|:---:|:---:|
+| ![Legacy Server Ping Fail](docs/images/03_Legacy_Server_Ping_Fail.png) | ![Modern Server Ping Success](docs/images/07_Modern_Server_Ping_Success.png) |
+| *Server0 → Server2 ping **FAILED*** <br> *(VLAN 99 sunucular arası iletişim ENGELLENDİ)* | *Server0 → Server2 ping **SUCCESS*** <br> *(VLAN 99 sunucular arası iletişim ÇALIŞIYOR)* |
 
 ### Architecture Comparison / Mimari Karşılaştırması
 
@@ -89,17 +99,18 @@ Bu proje, **802.1Q kapsülleme**, **OSPF Area 0 omurga yönlendirmesi**, **LACP 
 | **Troubleshooting** <br> *(Sorun Giderme)* | Complex, 8 routing points <br> *(Karmaşık, 8 yönlendirme noktası)* | Simplified, 4 routing points <br> *(Basitleştirilmiş, 4 yönlendirme noktası)* |
 | **Security Model** <br> *(Güvenlik Modeli)* | Distributed, conflicting policies <br> *(Dağıtık, çakışan politikalar)* | Centralized, tiered ACL hierarchy <br> *(Merkezi, katmanlı ACL hiyerarşisi)* |
 
-![Legacy EtherChannel](docs/images/02_Legacy_EtherChannel_v1.png)
-*Figure 4: Legacy EtherChannel Configuration (Present but routing conflicts remained)*
+### EtherChannel Implementation Comparison / EtherChannel Uygulama Karşılaştırması
+
+| **Legacy (v1) — Present but Ineffective** | **Modern (v2) — Fully Operational** |
+|:---:|:---:|
+| ![Legacy EtherChannel](docs/images/02_Legacy_EtherChannel_v1.png) | ![Modern EtherChannel](docs/images/05_Modern_EtherChannel_v2.png) |
+| *EtherChannel configured but routing conflicts remained* <br> *(EtherChannel yapılandırılmış ancak yönlendirme çakışmaları devam ediyor)* | *EtherChannel + ROAS = Full redundancy achieved* <br> *(EtherChannel + ROAS = Tam yedeklilik sağlandı)* |
 
 ---
 
 ## ✅ The Solution: Modern ROAS Architecture / Çözüm: Modern ROAS Mimarisi
 
 ### Modern Architecture (v2): Router-on-a-Stick Model
-
-![Modern Topology](docs/images/04_Modern_Topology_v2.png)
-*Figure 5: Modern ROAS Architecture with Centralized Routing*
 
 **[EN]** The modernized architecture implements **Router-on-a-Stick (ROAS)** with **802.1Q VLAN encapsulation**, completely eliminating distributed routing. All switches operate purely at Layer 2, while Cisco 2911 routers handle all inter-VLAN routing through subinterfaces.
 
@@ -162,11 +173,6 @@ interface Vlan99
  no ip address
  shutdown
 ```
-
-### 3. **Solution Validation**
-
-![Modern Server Ping Success](docs/images/07_Modern_Server_Ping_Success.png)
-*Figure 6: **Problem Solved** — Server-to-Server Communication Fully Restored*
 
 **[TR]** Modernize edilmiş mimari, dağıtık yönlendirmeyi tamamen ortadan kaldıran **802.1Q VLAN kapsülleme** ile **Router-on-a-Stick (ROAS)** uygular. Tüm anahtarlar tamamen Layer 2'de çalışırken, Cisco 2911 router'lar alt arayüzler aracılığıyla tüm VLAN'lar arası yönlendirmeyi gerçekleştirir.
 
@@ -481,9 +487,6 @@ interface FastEthernet0/24
 | **Load Balancing** | Traffic distributed across both links for efficiency |
 | **Loop Prevention** | STP treats bundle as single logical link |
 
-![Modern EtherChannel](docs/images/05_Modern_EtherChannel_v2.png)
-*Figure 7: EtherChannel Active — `show etherchannel summary` proof*
-
 **Verification Commands:**
 ```cisco
 show etherchannel summary          ! Verify bundle is "SU" (Layer2, Up)
@@ -495,31 +498,33 @@ show lacp neighbor                 ! Confirm LACP negotiation
 
 ## ✅ Verification & Evidence / Doğrulama ve Kanıtlar
 
-### 1. Server Connectivity Restoration
+### 1. Server Connectivity Restoration / Sunucu Bağlantısının Restorasyonu
 
-**Problem (Legacy v1):** Server-to-Server ping failed due to ACL conflicts on distributed SVIs.
+**[EN] Problem → Solution:**
+- **Legacy (v1):** Server-to-Server ping failed due to ACL conflicts on distributed SVIs
+- **Modern (v2):** ROAS architecture restored full VLAN 99 replication
 
-![Legacy Server Fail](docs/images/03_Legacy_Server_Ping_Fail.png)
-*Evidence 1: Legacy Architecture — Server0 cannot ping Server2 (VLAN 99 blocked)*
+**[TR] Sorun → Çözüm:**
+- **Eski (v1):** Dağıtık SVI'lerdeki ACL çakışmaları nedeniyle sunucular arası ping başarısız
+- **Modern (v2):** ROAS mimarisi VLAN 99 replikasyonunu tam olarak restore etti
 
-**Solution (Modern v2):** ROAS architecture restored full VLAN 99 replication.
-
-![Modern Server Success](docs/images/07_Modern_Server_Ping_Success.png)
-*Evidence 2: Modern Architecture — Server0 successfully pings Server2 (Problem SOLVED)*
+| **Legacy (v1) — FAILED ❌** | **Modern (v2) — RESTORED ✅** |
+|:---:|:---:|
+| ![Legacy Server Fail](docs/images/03_Legacy_Server_Ping_Fail.png) | ![Modern Server Success](docs/images/07_Modern_Server_Ping_Success.png) |
+| Server0 → Server2: **Request Timed Out** | Server0 → Server2: **Reply Received** |
+| *Critical failure blocking financial data replication* | *Problem completely resolved — 100% connectivity* |
 
 ---
 
-### 2. ACL Security Enforcement
+### 2. ACL Security Enforcement / ACL Güvenlik Uygulaması
 
-**Verification Goal:** Prove unauthorized access is actively blocked by Extended ACLs.
+**[EN] Verification Goal:** Prove unauthorized access is actively blocked by Extended ACLs  
+**[TR] Doğrulama Hedefi:** Yetkisiz erişimin Genişletilmiş ACL'ler tarafından aktif olarak engellendiğini kanıtlamak
 
-![PC Access Denied](docs/images/08_Modern_PC_Access_Denied.png)
-*Evidence 3: PC from VLAN 10 cannot access restricted VLAN 20 host (Blocked by ACL-V10-SEG)*
-
-**ACL Match Counters:**
-
-![ACL Proof](docs/images/06_Modern_ACL_Security_Proof.png)
-*Evidence 4: `show ip access-lists` displays match counts — Proves ACLs are actively filtering traffic*
+| **Unauthorized Access Attempt** | **ACL Match Counters** |
+|:---:|:---:|
+| ![PC Access Denied](docs/images/08_Modern_PC_Access_Denied.png) | ![ACL Proof](docs/images/06_Modern_ACL_Security_Proof.png) |
+| *PC (VLAN 10) → Restricted Host (VLAN 20)* <br> **ACCESS DENIED** | *`show ip access-lists` output* <br> **ACL hits confirm blocking** |
 
 ```cisco
 Router0# show ip access-lists ACL-V10-SEG
@@ -529,17 +534,25 @@ Extended IP access list ACL-V10-SEG
     permit ip any any (2341 matches)                    ! Allowed traffic
 ```
 
-**Interpretation:**
-- Match counters confirm ACLs are functioning
+**[EN] Interpretation:**
+- Match counters confirm ACLs are functioning correctly
 - Unauthorized access attempts are logged and denied
 - Legitimate traffic passes through permit statements
 
+**[TR] Yorumlama:**
+- Eşleşme sayaçları ACL'lerin doğru çalıştığını doğruluyor
+- Yetkisiz erişim denemeleri kaydedilip reddediliyor
+- Meşru trafik izin ifadelerinden geçiyor
+
 ---
 
-### 3. EtherChannel Redundancy
+### 3. EtherChannel Redundancy / EtherChannel Yedekliliği
+
+**[EN] Verification:** LACP EtherChannel is operational with both member links active  
+**[TR] Doğrulama:** LACP EtherChannel her iki üye link aktif olarak çalışıyor
 
 ![EtherChannel Status](docs/images/05_Modern_EtherChannel_v2.png)
-*Evidence 5: `show etherchannel summary` — Port-channel1 is operational with 2 active members*
+*`show etherchannel summary` — Port-channel1 operational with Fa0/23 & Fa0/24 active*
 
 ```cisco
 Switch# show etherchannel summary
