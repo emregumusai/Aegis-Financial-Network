@@ -74,7 +74,7 @@ Bu proje, **802.1Q kapsülleme**, **OSPF Area 0 omurga yönlendirmesi**, **LACP 
    - ACL match counters scattered across 8 switches
    - No centralized policy enforcement
 
-**[TR]** Orijinal ağ tasarımı, Çok Katmanlı Anahtarlar (MLS) üzerinde Switch Virtual Interface'ler (SVI'ler) kullanarak VLAN'lar arası yönlendirme gerçekleştiren **Layer 3 Switching** kullandı. Bu yaklaşım küçük ağlarda işe yarayabilse de, bu çok siteli finans ortamında kritik sorunlar yarattı:
+**[TR]** Orijinal ağ tasarımı, Çok Katmanlı Anahtarlar (MLS) üzerinde Switch Virtual Interface'ler (SVI'ler) kullanarak VLAN'lar arası yönlendirme gerçekleştiren **Layer 3 Switching** kullandı. Bu yaklaşım küçük ağlarda işe yarayabilse de, bu çok siteli finans ortamında kritik sorunlar oluşturdu:
 
 **Kritik Sorunlar:**
 - ACL çakışmaları ve yönlendirme tutarsızlıkları
