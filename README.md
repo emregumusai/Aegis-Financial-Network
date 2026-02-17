@@ -731,9 +731,9 @@ Network configurations and design principles may be adapted for academic use wit
 
 If you're interested in discussing network architecture, security design, or potential collaboration opportunities:
 
-**GitHub:** [Your GitHub Profile]  
-**LinkedIn:** [Your LinkedIn Profile]  
-**Email:** [Your Professional Email]
+**GitHub:** [github.com/emregumusai](https://github.com/emregumusai)  
+**LinkedIn:** [linkedin.com/in/emregumusai](https://www.linkedin.com/in/emregumusai)  
+**Email:** yunusemregumusofc@gmail.com
 
 ---
 
