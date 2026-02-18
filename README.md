@@ -1,4 +1,4 @@
-# Aegis Financial Network: Enterprise-Grade Infrastructure Modernization
+<h1 align="center">Aegis Financial Network: Enterprise-Grade Infrastructure Modernization</h1>
 
 > **[EN]** A comprehensive network transformation project demonstrating the migration from legacy Layer 3 switching to a modern Router-on-a-Stick (ROAS) architecture with Zero Trust security, OSPF backbone routing, and LACP redundancy across four financial branch locations in Turkey.
 >
@@ -622,7 +622,27 @@ Group  Port-channel  Protocol    Ports
 
 ---
 
-## 📂 Repository Structure / Depo Yapısı
+## �️ Made With / Kullanılan Teknolojiler
+
+**[EN]** This project was designed, implemented, and documented using the following professional-grade tools and technologies:
+
+**[TR]** Bu proje aşağıdaki profesyonel düzeydeki araçlar ve teknolojiler kullanılarak tasarlanmış, uygulanmış ve belgelenmiştir:
+
+| **Technology / Teknoloji** | **Purpose / Amaç** |
+|:---|:---|
+| 🖧 **Cisco Packet Tracer** | Network simulation and topology design / Ağ simülasyonu ve topoloji tasarımı |
+| 🔧 **Cisco IOS Software** | Router and switch configuration / Router ve switch yapılandırması |
+| 🌐 **Cisco 2911 ISR** | Enterprise-grade routing platform / Kurumsal düzey yönlendirme platformu |
+| 🔀 **Cisco Catalyst 3560** | Multilayer switching infrastructure / Çok katmanlı anahtarlama altyapısı |
+| 📡 **OSPF (Open Shortest Path First)** | Dynamic routing protocol / Dinamik yönlendirme protokolü |
+| 🔗 **IEEE 802.1Q** | VLAN tagging and trunk encapsulation / VLAN etiketleme ve trunk kapsülleme |
+| 🔐 **Extended ACLs** | Zero Trust security segmentation / Sıfır Güven güvenlik segmentasyonu |
+| 📊 **LACP (Link Aggregation Control Protocol)** | High availability link bundling / Yüksek erişilebilirlik link toplama |
+| 📝 **Markdown** | Professional documentation / Profesyonel dokümantasyon |
+
+---
+
+## �📂 Repository Structure / Depo Yapısı
 
 ```
 Aegis-Financial-Network/
@@ -720,25 +740,78 @@ All configurations are available in Cisco Packet Tracer format for hands-on lear
 
 ---
 
-## 📜 License
+## 📜 License / Lisans
 
-This project and its documentation are provided for educational and portfolio purposes.  
-Network configurations and design principles may be adapted for academic use with proper attribution.
+**[EN]** This project is open source and available for educational, academic, and personal use under the following terms:
+
+✅ **Permitted Uses:**
+- Educational and academic purposes (research, study, teaching)
+- Personal learning and portfolio demonstration
+- Non-commercial adaptation and modification
+- Sharing and distribution with proper attribution
+
+⚠️ **Commercial Use Restrictions:**
+- **Commercial use requires prior written permission** from the author
+- Contact via email before using this project in any commercial context
+- Commercial licensing terms available upon request
+
+📋 **Attribution Requirement:**
+
+If you use, adapt, or reference this project, please provide attribution:
+
+```
+Aegis Financial Network Project
+Author: Yunus Emre Gümüş
+Source: https://github.com/emregumusai/Aegis-Financial-Network
+```
+
+---
+
+**[TR]** Bu proje aşağıdaki koşullar altında eğitim, akademik ve kişisel kullanım için açık kaynaktır:
+
+✅ **İzin Verilen Kullanımlar:**
+- Eğitim ve akademik amaçlar (araştırma, çalışma, öğretim)
+- Kişisel öğrenme ve portföy gösterimi
+- Ticari olmayan uyarlama ve değişiklik
+- Uygun atıfla paylaşım ve dağıtım
+
+⚠️ **Ticari Kullanım Kısıtlamaları:**
+- **Ticari kullanım için yazardan önceden yazılı izin gereklidir**
+- Herhangi bir ticari bağlamda kullanmadan önce e-posta ile iletişime geçin
+- Talep üzerine ticari lisanslama koşulları mevcuttur
+
+📋 **Atıf Zorunluluğu:**
+
+Bu projeyi kullanır, uyarlar veya referans gösterirseniz, lütfen atıfta bulunun:
+
+```
+Aegis Financial Network Projesi
+Yazar: Yunus Emre Gümüş
+Kaynak: https://github.com/emregumusai/Aegis-Financial-Network
+```
 
 ---
 
 ## 🔗 Connect / İletişim
 
-If you're interested in discussing network architecture, security design, or potential collaboration opportunities:
+**[EN]** If you're interested in discussing network architecture, security design, or potential collaboration opportunities:
 
-**GitHub:** [github.com/emregumusai](https://github.com/emregumusai)  
-**LinkedIn:** [linkedin.com/in/emregumusai](https://www.linkedin.com/in/emregumusai)  
+**[TR]** Ağ mimarisi, güvenlik tasarımı veya potansiyel işbirliği fırsatları hakkında konuşmak isterseniz:
+
+**Author / Yazar:** Yunus Emre Gümüş  
+**GitHub:** [@emregumusai](https://github.com/emregumusai)  
+**LinkedIn:** [emregumusal](https://www.linkedin.com/in/emregumusal)  
 **Email:** yunusemregumusofc@gmail.com
 
 ---
 
 **Thank you for reviewing the Aegis Financial Network project!**  
 *Aegis Financial Network projesini incelediğiniz için teşekkür ederim!*
+
+---
+
+⭐ **If you found this project valuable, please consider starring the repository!**  
+⭐ **Bu projeyi değerli bulduysanız, lütfen repository'yi yıldızlayın!**
 
 ---
 
